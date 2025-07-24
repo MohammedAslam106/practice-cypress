@@ -7,7 +7,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "build-prod":"cd fe && pnpm install --frozen-lockfile && pnpm run build && cd .. && tsc && node dist/index.js"
+    "build-prod":"cd fe && pnpm install --frozen-lockfile && pnpm run build && cd .. && pnpm run build"
   },
   "keywords": [],
   "author": "",
