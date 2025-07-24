@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import { Todos } from '../models/todo'
+import { Todos } from '../models/todo.js'
 
 export async function createTodo(req: Request, res: Response) {
     try {

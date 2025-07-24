@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose, { Mongoose } from 'mongoose';
 import dotenv from 'dotenv'
-import todoRouter from './routes/todos'
+import todoRouter from './routes/todos.js'
 import path from 'path';
 import fs from 'node:fs'
 
