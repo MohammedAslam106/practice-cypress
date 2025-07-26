@@ -55,7 +55,7 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with: 
-          wait-on: 'http://localhost:5000'
+          wait-on: http://localhost:5000
 
   deploye:
     needs: cypress-run
