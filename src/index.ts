@@ -9,7 +9,7 @@ dotenv.config({
     path:'.env'
 })
 
-// console.log('DATABASE URL',process.env.DB_URL)
+console.log('DATABASE URL',process.env.MY_NAME)
 
 const app = express()
 
