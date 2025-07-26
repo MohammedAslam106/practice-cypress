@@ -26,6 +26,16 @@ jobs:
         with:
           node-version: 22
 
+# SEEDING DATABASE FOR FAKE DATA
+      - name: Seed MongoDB with test data
+        run: |
+          mongo localhost:27017/test --eval '
+            db.todos.insertMany([
+              {title:'Fake Todo 1', description:'This is the todo created by github actions'},
+              {title:'Fake Todo 2', description:'This is the todo created by github actions'},
+            ]);
+          '
+
 # INSTALLING pnpm GLOBALLY
       - name: Install pnpm
         run: npm install -g pnpm
