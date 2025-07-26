@@ -33,7 +33,9 @@ jobs:
         run: pnpm run build-prod
 
       - name: Start The Server
-        run: pnpm run start && pnpm wait-on http://localhost:5000
+        run: |
+          pnpm run start &       # Run in background
+          npx wait-on http://localhost:5000
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
