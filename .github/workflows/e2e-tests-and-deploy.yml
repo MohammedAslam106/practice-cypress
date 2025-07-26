@@ -46,19 +46,16 @@ jobs:
         run: pnpm exec cypress install
 
 # STARTING THE SERVER 
-      # - name: Start The Server
-      #   run: |
-      #     pnpm run dev &       # Run in background
-      #     npx wait-on http://localhost:5000
+      - name: Start The Server
+        run: |
+          pnpm run dev &       # Run in background
+          npx wait-on http://localhost:5000
 
 # RUNNING THE CYPRESS TESTS
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with: 
-          start: pnpm run dev
-          wait-on: 'tcp:5000'
-          wait-on-timeout: 60
-          install-command: pnpm install
+          wait-on: 'http://localhost:5000'
 
   deploye:
     needs: cypress-run
