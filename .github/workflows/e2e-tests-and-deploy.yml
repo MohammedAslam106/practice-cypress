@@ -56,7 +56,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with: 
           start: pnpm run dev
-          wait-on: http://localhost:5000
+          wait-on: tcp:5000
           wait-on-timeout: 60
 
   deploye:
