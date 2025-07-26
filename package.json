@@ -8,14 +8,13 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "build-prod": "pnpm install --frozen-lockfile && cd fe && pnpm install --frozen-lockfile && pnpm run build && cd .. && pnpm run build"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^24.0.15",
-    "cypress": "^14.5.2",
+    "cypress": "^14.5.3",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },

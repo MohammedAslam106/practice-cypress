@@ -10,7 +10,8 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "lib": ["ES2022"],
-        "verbatimModuleSyntax": true
+        "verbatimModuleSyntax": true,
+        "baseUrl": "./"
       },
       "include": ["src/**/*","cypress"],
       "exclude": ["node_modules", "dist"]
