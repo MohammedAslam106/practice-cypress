@@ -48,11 +48,11 @@ export default function TodoFormPage( ){
         <div style={{paddingInline:'1rem',paddingBlock:'2rem',display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center', width:'100%',minHeight:'100vh'}} className=''>
             <div style={{maxWidth:'750px'}}>
                 <div style={{width:'100%'}}>
-                    <form ref={formRef} onSubmit={submitForm}>
-                        <input type="text" name="title" id="title" />
-                        <input type="text" name="description" id="description" />
+                    <form data-testid='cy-todo-form' ref={formRef} onSubmit={submitForm}>
+                        <input data-testid='cy-inp-title' type="text" name="title" id="title" />
+                        <input data-testid='cy-inp-description' type="text" name="description" id="description" />
 
-                        <button id="send-todo" type="submit">
+                        <button data-testid="cy-send-todo" id="send-todo" type="submit">
                             Save Todo
                         </button>
                     </form>

@@ -8,13 +8,13 @@ function App() {
         <title>Home</title>
       </Head>
       <div>
-        <h1>
+        <h1 data-testid='cy-home-heading'>
           Hello, Welcome to todo app
         </h1>
         <p>
           Please create your todo here
         </p>
-        <a id="link" href="/todo-form-page">
+        <a data-testid='cy-anchor-todo-form' id="link" href="/todo-form-page">
           Todo Form
         </a>
       </div>

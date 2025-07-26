@@ -69,7 +69,7 @@ function ListTodos() {
         )
     }
     return (
-        <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%' }} className=''>
+        <div data-testid='cy-todo-cont' style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%' }} className=''>
             {
                 data?.data?.map((todo) => {
                     return <TodoElement todo={todo} />
@@ -106,15 +106,15 @@ function TodoElement({todo}:{todo:Todo}) {
         }
     },[data])
     return (
-        <div style={{ paddingInline: '2rem', paddingBlock: '1.5rem', background: `${todo.status ? '#fafafa' : '#fa4504'}`, border: '1px solid #454545', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={todo._id}>
-            <p>
+        <div data-testid={`cy-todo-el-${todo._id}`} style={{ paddingInline: '2rem', paddingBlock: '1.5rem', background: `${todo.status ? '#fafafa' : '#fa4504'}`, border: '1px solid #454545', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={todo._id}>
+            <p data-testid={`cy-todo-el-p-${todo._id}`}>
                 {todo.title}
             </p>
 
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem' }}>
                 {
                     (!isMutating) ?
-                        <input
+                        <input data-testid={`cy-check-todo-${todo._id}`}
                             checked={todo.status}
                             onChange={async (e) => {
                                 // setTodoId(todo._id);
@@ -126,7 +126,7 @@ function TodoElement({todo}:{todo:Todo}) {
                         <TbLoader2 />
                 }
 
-                <button onClick={async () => {
+                <button data-testid={`cy-delete-todo-${todo._id}`} onClick={async () => {
                     await trigger({ action: 'delete', id: todo._id, status: false })
                 }} style={{ padding: 0, margin: 0, fontStyle: 'none' }}>
                     <TiDelete size={15} />
