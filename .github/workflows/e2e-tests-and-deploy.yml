@@ -46,27 +46,29 @@ jobs:
         run: pnpm exec cypress install
 
 # STARTING THE SERVER 
-      - name: Start The Server
-        run: |
-          pnpm run dev &       # Run in background
-          npx wait-on http://localhost:5000
+      # - name: Start The Server
+      #   run: |
+      #     pnpm run dev &       # Run in background
+      #     npx wait-on http://localhost:5000
 
 # RUNNING THE CYPRESS TESTS
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with: 
+          start: pnpm run dev
           wait-on: http://localhost:5000
+          wait-on-timeout: 60
 
   deploye:
     needs: cypress-run
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.repositoty == 'MohammedAslam106/practice-cypress'
+    if: github.event_name == 'push' && github.repository == 'MohammedAslam106/practice-cypress'
 
     steps:
       - name: Trigger Render Deploy Hook
         run: curl -X GET "$RENDER_DEPLOY_HOOK_URL"
         env:
-          RENDER_DEPLOY_HOOK_URL:${{secrets.RENDER_DEPLOY_HOOK_URL}}
+          RENDER_DEPLOY_HOOK_URL: ${{secrets.RENDER_DEPLOY_HOOK_URL}}
       
       
       
