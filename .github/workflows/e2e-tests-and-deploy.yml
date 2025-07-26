@@ -1,0 +1,52 @@
+name: Test And Deploy
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+          
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup NodeJs
+        uses: actions/setup-node@4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies And Build
+        run: pnpm run build-prod
+
+      - name: Start The Server
+        run: pnpm run start && pnpm wait-on http://localhost:5000
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with: 
+          wait-on: http://localhost:5000
+
+  deploye:
+    needs: cypress-run
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.repositoty == 'MohammedAslam106/practice-cypress'
+
+    steps:
+      - name: Trigger Render Deploy Hook
+        run: curl -X GET "$RENDER_DEPLOY_HOOK_URL"
+        env:
+          RENDER_DEPLOY_HOOK_URL:${{secrets.RENDER_DEPLOY_HOOK_URL:}}
+      
+      
+      
