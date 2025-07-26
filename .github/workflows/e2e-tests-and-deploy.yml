@@ -36,7 +36,7 @@ jobs:
 
 # DATABASE SEEDING OF FAKE DATA FOR TESTING
       - name: Database Seeding
-        run: node node dist/lib/seed.js
+        run: node dist/lib/seed.js
 
 # SETTING UP THE CACHING FOR CYPRESS BINARY
       - name: Cache Cypress binary
