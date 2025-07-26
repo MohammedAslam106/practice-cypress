@@ -32,7 +32,7 @@ jobs:
 
 # INSTALLING THE DEP AND BUILDING IT
       - name: Install Dependencies And Build
-        run: cd fe && pnpm install && cd .. && pnpm install 
+        run: pnpm run build-prod 
 
 # SETTING UP THE CACHING FOR CYPRESS BINARY
       - name: Cache Cypress binary
@@ -48,7 +48,7 @@ jobs:
 # STARTING THE SERVER 
       - name: Start The Server
         run: |
-          pnpm run dev &       # Run in background
+          pnpm run start &       # Run in background
           npx wait-on http://localhost:5000
 
 # RUNNING THE CYPRESS TESTS
