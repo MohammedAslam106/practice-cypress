@@ -26,17 +26,32 @@ jobs:
         with:
           node-version: 22
 
+# INSTALLING pnpm GLOBALLY
       - name: Install pnpm
         run: npm install -g pnpm
 
+# INSTALLING THE DEP AND BUILDING IT
       - name: Install Dependencies And Build
         run: pnpm run build-prod
 
+# SETTING UP THE CACHING FOR CYPRESS BINARY
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+# INSTALLING THE CYPRESS BINARY
+      - name: Install Cypress binary
+        run: pnpm exec cypress install
+
+# STARTING THE SERVER 
       - name: Start The Server
         run: |
           pnpm run start &       # Run in background
           npx wait-on http://localhost:5000
 
+# RUNNING THE CYPRESS TESTS
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with: 
