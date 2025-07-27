@@ -10,6 +10,7 @@ on:
 # ADD ENV's HERE
 env:
   DB_URL: ${{ secrets.DATABASE_URL }}
+  MY_NAME: 'Aslam'
 
 jobs:
   cypress-run:
