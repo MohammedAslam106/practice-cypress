@@ -7,6 +7,10 @@ on:
     branches:
       - main
 
+# ADD ENV's HERE
+env:
+  DB_URL: ${{ secrets.DATABASE_URL }}
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
