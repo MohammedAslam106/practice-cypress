@@ -37,9 +37,6 @@ jobs:
 
 # INSTALLING THE DEP AND BUILDING IT
       - name: Install Dependencies
-        run: pnpm install
-
-      - name: Build
         run: pnpm run build-prod
 
 # DATABASE SEEDING OF FAKE DATA FOR TESTING
