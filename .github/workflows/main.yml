@@ -1,0 +1,48 @@
+name: Greet New Starrer via Email
+
+on:
+  watch:
+    types: [started]
+
+jobs:
+  send-greeting:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Get the stargazer's public email address using their GitHub username
+      - name: Fetch Starrer's Email
+        id: get_email
+        uses: evvanErb/get-github-email-by-username-action@v1.25
+        with:
+          github-username: ${{ github.actor }}
+
+      # Step 2: Send the email ONLY if a public email address was successfully retrieved
+      - name: Send Greeting Email
+        if: steps.get_email.outputs.email != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # SMTP Mail Server Settings (Gmail Example)
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          
+          # Email Contents
+          subject: "Thank you for starring ${{ github.repository }}! ✨"
+          from: "Your Name <${{ secrets.MAIL_USERNAME }}>"
+          to: ${{ steps.get_email.outputs.email }}
+          body: |
+            Hi @${{ github.actor }},
+
+            Thank you so much for starring my repository, ${{ github.repository }}! 
+            Your support means a lot to the project. 
+
+            Feel free to open an issue or submit a pull request if you have any feedback or ideas.
+
+            Best regards,
+            Mohammed Aslam
+
+      # Step 3: Optional logging fallback if the email is private
+      - name: Log Hidden Email
+        if: steps.get_email.outputs.email == ''
+        run: echo "Could not send greeting because @${{ github.actor }} has a private email."
