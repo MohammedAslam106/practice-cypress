@@ -37,7 +37,7 @@ jobs:
 
 # INSTALLING THE DEP AND BUILDING IT
       - name: Install Dependencies And Build
-        run: pnpm run build-prod 
+        run: pnpm run build-prod --allow-scripts
 
 # DATABASE SEEDING OF FAKE DATA FOR TESTING
       - name: Database Seeding
